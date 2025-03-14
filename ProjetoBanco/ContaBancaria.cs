@@ -77,8 +77,8 @@ namespace ProjetoBanco
     
         public void CriarConta()
         {
-            CriarNumero();
             CriarNome();
+            CriarNumero();
             CriarSaldo();
 
         }
