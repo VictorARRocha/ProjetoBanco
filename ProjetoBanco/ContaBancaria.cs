@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,8 @@ namespace ProjetoBanco
 {
     public class ContaBancaria
     {
-
-        private int _numeroConta;
         private string _titular;
+        private int _numeroConta;
         private double _saldo;
 
         public string Titular
@@ -26,13 +26,12 @@ namespace ProjetoBanco
                 {
                     Console.Clear();
                     Console.WriteLine("Digite um nome válido");
-                    CriarNome();
                 }
                 else
                 {
                     _titular = value;
                 }
-            }       
+            }
         }
         public double Saldo
         {
@@ -42,7 +41,7 @@ namespace ProjetoBanco
             }
             set
             {
-                if (value < 0 || value == null  )
+                if (value < 0 || value == null)
                 {
                     _saldo = 0;
                 }
@@ -58,73 +57,63 @@ namespace ProjetoBanco
             {
                 return _numeroConta;
             }
-            set 
+            set
             {
                 if (value.ToString().Length < 8)
                 {
                     Console.Clear();
                     Console.WriteLine("O número da conta precisa ter mais de oito caracteres.");
-                    CriarNumero();
                 }
                 else
                 {
-                    _numeroConta = value; 
+                    _numeroConta = value;
                 }
-                
+
             }
         }
 
-    
-        public void CriarConta()
-        {
-            CriarNome();
-            CriarNumero();
-            CriarSaldo();
 
-        }
-        public void CriarNome()
+        public ContaBancaria(string titular, int numeroConta, double saldo)
         {
-            Console.WriteLine("Digite o nome do titular da conta");
-            Titular = Console.ReadLine();
-
+            _titular = titular;
+            _numeroConta = numeroConta;
+            _saldo = saldo;
         }
-        public void CriarNumero()
+        public virtual double Depositar(double valor)
         {
-            Console.WriteLine("Digite o número da conta");
-            try { 
-            NumeroConta = int.Parse(Console.ReadLine());
-            }
-            catch (Exception ex) 
+           return Saldo += valor;
+        }
+        public virtual double Sacar(double valor)
+        {
+            if (Saldo >= valor)
             {
-                Console.WriteLine("Valor inválido");
-                NumeroConta = 0;
+                return Saldo -= valor;
+            }
+            else
+            {
+                Console.WriteLine("Saldo insuficiente");
+                return Saldo;
             }
 
+
         }
-        public void CriarSaldo()
+        public void ExibirSaldo()
         {
-            try
-            {
-                Console.WriteLine("Digite o saldo da conta");
-                Saldo = double.Parse(Console.ReadLine());
-            }
-            catch (Exception ex)
-            {
-                Saldo = 0;
-            }
+            Console.WriteLine($"{TipoConta()} - {this.Titular} | Saldo: R${Saldo}");
             
 
         }
 
+        public virtual string TipoConta()
+        {
+            return "rodolfo"; 
+        }
+
+
+
+
+
+
+
     }
-
-
-
-
-       
-
-
-
-
-    
 }
