@@ -11,6 +11,8 @@ namespace ProjetoBanco
         public ContaCorrente(string titular, int numeroConta, double saldo) : base(titular, numeroConta, saldo)
         {
         }
+
+
         public override double Sacar(double valor)
         {
             if (Saldo >= valor)
@@ -26,9 +28,11 @@ namespace ProjetoBanco
 
         }
 
-        public override string TipoConta() 
+        public override void ExibirSaldo()
         {
-            return "Conta Corrente";
+            Console.WriteLine($"Conta Corrente - {this.Titular} | Saldo: R${Saldo}");
+
+
         }
 
     }

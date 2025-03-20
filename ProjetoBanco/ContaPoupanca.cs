@@ -10,17 +10,19 @@ namespace ProjetoBanco
     {
         public ContaPoupanca(string titular, int numeroConta, double saldo) : base(titular, numeroConta, saldo)
         {
+
         }
         public override double Depositar(double valor)
         {
             return Saldo += valor + (valor * 0.005);
         }
 
-        public override string TipoConta()
+        public override void ExibirSaldo()
         {
-            return "Conta Poupança";
-        }
+            Console.WriteLine($"Conta Poupança - {this.Titular} | Saldo: R${Saldo}");
 
+
+        }
 
     }
 }

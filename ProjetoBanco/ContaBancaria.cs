@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoBanco
 {
-    public class ContaBancaria
+    public class ContaBancaria : IContaBancaria
     {
         private string _titular;
         private int _numeroConta;
@@ -22,15 +22,8 @@ namespace ProjetoBanco
             }
             set
             {
-                if (value == null || value == "")
-                {
-                    Console.Clear();
-                    Console.WriteLine("Digite um nome válido");
-                }
-                else
-                {
-                    _titular = value;
-                }
+                 _titular = value;
+                
             }
         }
         public double Saldo
@@ -59,15 +52,9 @@ namespace ProjetoBanco
             }
             set
             {
-                if (value.ToString().Length < 8)
-                {
-                    Console.Clear();
-                    Console.WriteLine("O número da conta precisa ter mais de oito caracteres.");
-                }
-                else
-                {
+                
                     _numeroConta = value;
-                }
+                
 
             }
         }
@@ -75,10 +62,11 @@ namespace ProjetoBanco
 
         public ContaBancaria(string titular, int numeroConta, double saldo)
         {
-            _titular = titular;
-            _numeroConta = numeroConta;
-            _saldo = saldo;
+            Titular = titular;
+            NumeroConta = numeroConta;
+            Saldo = saldo;
         }
+
         public virtual double Depositar(double valor)
         {
            return Saldo += valor;
@@ -97,20 +85,12 @@ namespace ProjetoBanco
 
 
         }
-        public void ExibirSaldo()
+        public virtual void ExibirSaldo()
         {
-            Console.WriteLine($"{TipoConta()} - {this.Titular} | Saldo: R${Saldo}");
+            Console.WriteLine($"Conta bancaria - {this.Titular} | Saldo: R${Saldo}");
             
 
         }
-
-        public virtual string TipoConta()
-        {
-            return "rodolfo"; 
-        }
-
-
-
 
 
 
