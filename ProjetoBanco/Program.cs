@@ -108,16 +108,19 @@ namespace ProjetoBanco
                 if (opc == 1)
                 {
                     ContaPoupanca cP = new ContaPoupanca(nomeUser, numeroConta, saldo);
+                    contaBancarias.Add(cP);
                 }
                 else if (opc == 2)
                 {
                     ContaCorrente cC = new ContaCorrente(nomeUser, numeroConta, saldo);
+                    contaBancarias.Add(cC);
                 }
                 else
                 {
                     Console.WriteLine("Opção inválida");
                     CriarConta(contaBancarias);
                 }
+
             }
             catch (Exception ex) 
             { 
