@@ -34,7 +34,7 @@ namespace ProjetoBanco
 
 
             int continua = 0;
-            do
+            while (continua == 0) 
             {
                 Console.Clear();
                 Console.WriteLine();
@@ -57,11 +57,11 @@ namespace ProjetoBanco
                         break;
 
                     case "2":
-                        Saque(contaBancarias);
+                        Sacar(contaBancarias);
                         break;
 
                     case "3":
-
+                        Depositar(contaBancarias);
                         break;
 
                     case "4":
@@ -77,7 +77,7 @@ namespace ProjetoBanco
                 Console.WriteLine("0 - Sim | 1 - Não");
                 continua = int.Parse(Console.ReadLine());
 
-            } while (continua == 0);
+            }
 
         }
 
@@ -156,7 +156,7 @@ namespace ProjetoBanco
             return false;
         }
 
-        public static void Saque(List<ContaBancaria> contaBancarias)
+        public static void Sacar(List<ContaBancaria> contaBancarias)
         {
             Console.WriteLine("Escolha a conta em que você deseja sacar: ");
             MostrarContas(contaBancarias);
@@ -191,6 +191,27 @@ namespace ProjetoBanco
                 Console.WriteLine();
                 ContaBancaria conta = contaBancarias.FirstOrDefault(c => c.NumeroConta == opc);
                 conta.ExibirSaldo();
+            }
+            else
+            {
+                Console.WriteLine("Conta inexistente");
+            }
+        }
+
+        public static void Depositar(List<ContaBancaria> contaBancarias)
+        {
+            Console.WriteLine("Escolha a conta que deseja realizar o deposito");
+            MostrarContas(contaBancarias);
+
+            Console.WriteLine("Numero da conta: ");
+            int opc = int.Parse((Console.ReadLine()));
+            ProcurarContas(opc, contaBancarias);
+            if (ProcurarContas(opc, contaBancarias))
+            {
+                ContaBancaria conta = contaBancarias.FirstOrDefault(c => c.NumeroConta == opc);
+                Console.WriteLine("Quanto você deseja sacar? ");
+                double sacar = double.Parse(Console.ReadLine());
+                conta.Depositar(sacar);
             }
             else
             {
